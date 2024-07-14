@@ -12,7 +12,7 @@ export default function Home() {
       <div >
       <div className='flex flex-col sm:flex-row lg:bg-slate-300'>
             <div className='flex flex-col flex-wrap px-10 pt-32 gap-10'>
-              <h1 className='font-extralight text-center text-white sm:text-black sm:text-start mt-3 text-2xl sm:text-4xl font-mono'>Welcome!</h1>
+              <h1 className='font-extralight bg-black sm:bg-white text-center text-white rounded-lg max-w-xl mx-auto sm:text-black mt-3 text-2xl sm:text-4xl font-mono'>Welcome!</h1>
               <h1 className='font-extralight text-center bg-white rounded-md p-3 sm:text-start text-2xl sm:text-4xl'><span className='text-red-400'>ISUcarpooling</span> is a unique ride sharing solution designed exclusively for Cyclones!</h1>
               <ul className='p-10 flex flex-col lg:text-black text-white justify-center'>
                 <li className='cursor-pointer flex-row items-center gap-2 flex mb-10'><FaRegHandPointRight className='text-white sm:text-green-500' size={32}/><p className='text-2xl font-mono'>It's free</p></li>
