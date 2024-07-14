@@ -7,10 +7,11 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
 
+
 dotenv.config();
 
 
-
+ 
 let transpoter = nodemailer.createTransport({
     host: "smtp.office365.com",
     port: 587,
@@ -26,7 +27,7 @@ transpoter.verify((error,success) =>{
         console.log(error);
     }
     else{
-        console.log("Server is ready to take our messages");
+        console.log("Ready to send messages");
     }
 })
 
@@ -56,8 +57,8 @@ const sendOTPverifcationEmail = async ({_id,email}, res) => {
     try {
         const otp = `${Math.floor(1000 + Math.random()*9000)}`;
         
-
         const mailOptions = {
+            
             from: process.env.EMAIL,
             to: email,
             subject: "Verify your email for ISUcarpool",
