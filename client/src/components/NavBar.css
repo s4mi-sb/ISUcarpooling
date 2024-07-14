@@ -1,0 +1,10 @@
+.hide{
+    overflow: hidden;
+    transition: height ease 0.4s;
+    height: 0px;
+    padding: 0px;
+}
+.show{
+    height: 70px;
+    padding: 12px;
+}
