@@ -4,6 +4,6 @@ Isucarpooling is a full stack web application that allows ISU riders to share ri
 
 Developed with **MERN** stack with addition to **Tailwind CSS, Nodemailer, GoogleMaps API, Redux, JWT**, and **AWS S3 Bucket**
 
-Check it out at => www.isucarpooling.onrender.com
+Check it out at => https://isucarpooling.onrender.com
 
 
