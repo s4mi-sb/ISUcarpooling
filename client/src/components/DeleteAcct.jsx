@@ -1,7 +1,7 @@
 import React from 'react'
 import {FaX} from 'react-icons/fa6'
 import { useSelector,useDispatch } from 'react-redux'
-import { deleteUserError,deleteUserStart,deleteUserSuccess} from '../redux/user/userSlice';
+import { deleteUserError,deleteUserStart,deleteUserSuccess, signOutSuccess} from '../redux/user/userSlice';
 
 export default function DeleteAcct({setDeleteUser}) {
 
@@ -15,9 +15,14 @@ const handleDelete = async () =>{
         method: "DELETE",
         });
         const data = await res.json();
+        console.log(data.message);
+        if(data.message === 'Session expired'){
+            dispatch(signOutSuccess(data));
+            return;
+        }
         if(data.success === false){
-        dispatch(deleteUserError(data.message));
-        return;
+            dispatch(deleteUserError(data.message));
+            return;
         }
         dispatch(deleteUserSuccess(data));
     } catch (error) {

@@ -7,7 +7,7 @@ import logo from '../../public/logo.jpg'
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const {currentUser, loading, error} = useSelector(state => state.user);
+  const {currentUser, loading, error, userLoggedin} = useSelector(state => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleChange = (e) =>{
@@ -38,7 +38,7 @@ export default function SignIn() {
       }
       
       dispatch(SignInSuccess(data));
-      navigate('/');
+      navigate('/profile');
     } catch (error) {
       dispatch(SignInError(error.message));
     }
@@ -75,6 +75,7 @@ export default function SignIn() {
 
       <Link to="/forgotPassword"><p className='text-red-500 cursor-pointer text-start hover:underline'>Forgot Password?</p></Link>
       {error && <p className='text-red-700 mt-5'>{error}</p>}
+      {<p className='text-red-700 mt-5'>{userLoggedin}</p>}
       <h1 className='font-bold text-xl flex flex-wrap items-center mx-10 sm:mx-28 mt-12'>
                
        

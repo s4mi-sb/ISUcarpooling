@@ -143,7 +143,6 @@ export const resendOTP = async (req,res,next) =>{
         else{
             await userOTPverification.deleteMany({userId});
             await User.updateOne({verified: false});
-            res.status(202).clearCookie('accessToken');
             
             const validUser = await User.findOne({email});
             if (!validUser) {
@@ -226,7 +225,7 @@ export const signin = async (req,res,next) =>{
 export const signout = async (req,res,next) =>{
     try {
         res.clearCookie('accessToken');
-        res.status(200).json({message: 'User has been logged out'});
+        res.status(200).json({message: 'You were logged out'});
     } catch (error) {
         next(error);
     }

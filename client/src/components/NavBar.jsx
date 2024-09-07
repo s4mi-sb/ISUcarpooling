@@ -30,6 +30,17 @@ useEffect(()=>{
   if(searchValfromURL){
     setSearch(searchValfromURL);
   }
+  const handleSize = ()=>{
+    if (window.innerWidth > 768) {
+        setOpen(false);
+    }
+  }
+  handleSize();
+
+
+  window.addEventListener('resize', handleSize);
+
+  return () => window.removeEventListener('resize', handleSize);
 },[location.search])
 
 const handleSubmit = (e)=>{
@@ -41,7 +52,7 @@ const handleSubmit = (e)=>{
 
 }
   return (
-    <header className='fixed w-full bg-cyan-700'>
+    <header className='fixed z-10 w-full bg-cyan-700'>
     <div className='flex flex-row justify-between items-center max-w-6xl mx-auto p-4'>
         <Link to='/'>
             <div className='cursor-pointer '>

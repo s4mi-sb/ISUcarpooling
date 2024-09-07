@@ -5,6 +5,7 @@ import {Autocomplete} from '@react-google-maps/api'
 
 import {useSelector} from 'react-redux'
 import { useNavigate} from 'react-router-dom';
+import { signoutUser } from '../components/signoutUser';
 
 
 
@@ -12,7 +13,6 @@ export default function RideShare() {
 
 const {currentUser} = useSelector((state) => state.user);
 
-const [upload,setUpload] = useState(false);
 
 const [time,setTime] = useState('');
 
@@ -96,7 +96,10 @@ const handleSubmit = async (e)=>{
         });
         const data = await res.json();
         setLoading(false);
-        setUpload(true);
+        if(data.message === "Session expired"){
+            signoutUser();
+            return;
+        }
         if(data.success === false ){
             return setError(data.message);
         }

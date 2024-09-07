@@ -4,14 +4,13 @@ import Mapcontainer from '../components/Mapcontainer'
 
 import {useSelector} from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
+import { signoutUser } from '../components/signoutUser';
 
 export default function EditRides() {
 
     const {currentUser} = useSelector((state) => state.user);
 
     const param = useParams();
-
-    const [upload,setUpload] = useState(false);
     
     const navigate = useNavigate();
     
@@ -112,7 +111,10 @@ export default function EditRides() {
             });
             const data = await res.json();
             setLoading(false);
-            setUpload(true);
+            if(data.message === "Session expired"){
+                signoutUser();
+                return;
+            }
             if(data.success === false ){
                 return setError(data.message);
             }

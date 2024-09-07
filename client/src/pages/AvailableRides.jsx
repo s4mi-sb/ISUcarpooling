@@ -7,6 +7,7 @@ import { MdNoLuggage, MdError  } from "react-icons/md";
 import { FaDollarSign } from "react-icons/fa";
 import { TbMoodEmpty } from "react-icons/tb";
 import {FaX} from 'react-icons/fa6'
+import { signoutUser } from '../components/signoutUser';
 
 
 export default function AvailableRides() {
@@ -22,11 +23,17 @@ export default function AvailableRides() {
             try {
                 const res = await fetch(`/api/user/availableRides/${userId}`);
                 const data = await res.json();
+                if(data.message === "Session expired"){
+                    signoutUser();
+                    return;
+                }
                 if(data.success === false){
                     setError(true);
+                    return
                 }
                 setUserRides(data);
             } catch (error) {
+                
                 setError(true);
             }
         }
@@ -40,6 +47,10 @@ export default function AvailableRides() {
                 method: 'DELETE'
            });
            const data = await res.json();
+           if(data.message === "Session expired"){
+            signoutUser();
+            return;
+            }
            if(data.success === false){
                 setError(true);
                 return;

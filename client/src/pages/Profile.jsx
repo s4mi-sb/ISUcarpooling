@@ -85,6 +85,10 @@ export default function Profile() {
         body: JSON.stringify(form),
       });
       const data = await res.json();
+      if(data.message === 'Session expired'){
+        dispatch(signOutSuccess(data));
+        return;
+      }
       if(data.success === false){
         dispatch(updateUserError(data.message));
         return;
@@ -130,6 +134,23 @@ export default function Profile() {
   
     }
   }
+  const handleUser = async ()=>{
+    try {
+      const res = await fetch(`/api/user/${currentUser._id}`);
+      const data = await res.json();
+      if(data.message === 'Session expired'){
+        dispatch(signOutSuccess(data));
+        return;
+      }
+      if(data.success === false){
+          console.log(data.message);
+          return;
+      }
+      navigate('/rideShare')
+  } catch (error) {
+      setError(true);
+  }
+  }
 
   
 
@@ -173,8 +194,8 @@ export default function Profile() {
         disabled:opacity-60 w-full'>{loading?'Getting data...':'View my uploads'}</Link>
         }
 
-        <Link to = '/rideShare' className='border p-3 bg-slate-500 rounded-md text-xl text-white hover:text-black cursor-pointer hover:opacity-80
-        disabled:opacity-60 w-full'>Offer a Ride</Link>
+        <Link className='border p-3 bg-slate-500 rounded-md text-xl text-white hover:text-black cursor-pointer hover:opacity-80
+        disabled:opacity-60 w-full' onClick={handleUser}>Offer a Ride</Link>
 
         
         

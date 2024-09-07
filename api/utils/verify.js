@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 export const verifyUser = (req, res, next) =>{
     const token = req.cookies.accessToken;
     if(!token) {
-        return next(errorHandler(401, "You session has expired! Please sign in again."));
+        return next(errorHandler(401, "Session expired"));
     }
     jwt.verify(token, process.env.JWT_Secret, (err,user) =>{
         if(err){
