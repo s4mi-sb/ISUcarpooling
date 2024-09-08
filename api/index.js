@@ -25,7 +25,7 @@ app.listen(3000,() =>{
 });
 
 app.use(cors({
-    origin: 'https://iastatecarpooling.vercel.app',
+    origin: 'https://iastatecarpooling-82f9ctigz-s4mi-sbs-projects.vercel.app/',
     methods : ["POST","GET", "DELETE"],
     credentials: true
 }));
