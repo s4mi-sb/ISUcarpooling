@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors'
 import mongoose from 'mongoose';
 import path from 'path'
 import dotenv from 'dotenv';
@@ -17,10 +18,17 @@ mongoose.connect(process.env.MONGO).then(()=>{
     });
 const app = express();
 
+
+
 app.listen(3000,() =>{
     console.log("Server is running in port 3000");
 });
 
+app.use(cors({
+    origin: 'https://isucarpool.vercel.app/',
+    methods : ["POST","GET", "DELETE"],
+    credentials: true
+}));
 
 const _dirname = path.resolve();
 
