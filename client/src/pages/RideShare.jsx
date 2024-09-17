@@ -2,17 +2,16 @@ import React, { useState } from 'react'
 
 import Mapcontainer from '../components/Mapcontainer'
 import {Autocomplete} from '@react-google-maps/api'
-
-import {useSelector} from 'react-redux'
+import { signOutSuccess} from '../redux/user/userSlice';
+import {useSelector,useDispatch} from 'react-redux'
 import { useNavigate} from 'react-router-dom';
-import { signoutUser } from '../components/signoutUser';
 
 
 
 export default function RideShare() {
 
 const {currentUser} = useSelector((state) => state.user);
-
+const dispatch = useDispatch();
 
 const [time,setTime] = useState('');
 
@@ -97,7 +96,8 @@ const handleSubmit = async (e)=>{
         const data = await res.json();
         setLoading(false);
         if(data.message === "Session expired"){
-            signoutUser();
+            dispatch(signOutSuccess(data));
+            // signoutUser();
             return;
         }
         if(data.success === false ){

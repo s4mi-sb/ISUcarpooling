@@ -7,10 +7,11 @@ import { MdNoLuggage, MdError  } from "react-icons/md";
 import { FaDollarSign } from "react-icons/fa";
 import { TbMoodEmpty } from "react-icons/tb";
 import {FaX} from 'react-icons/fa6'
-import { signoutUser } from '../components/signoutUser';
-
+import { signOutSuccess} from '../redux/user/userSlice';
+import {useDispatch} from 'react-redux'
 
 export default function AvailableRides() {
+    const dispatch = useDispatch();
     const param = useParams();
     const [userRides, setUserRides] = useState([]);
     const [error, setError] = useState(false);
@@ -24,7 +25,7 @@ export default function AvailableRides() {
                 const res = await fetch(`/api/user/availableRides/${userId}`);
                 const data = await res.json();
                 if(data.message === "Session expired"){
-                    signoutUser();
+                    dispatch(signOutSuccess(data));
                     return;
                 }
                 if(data.success === false){
@@ -48,7 +49,7 @@ export default function AvailableRides() {
            });
            const data = await res.json();
            if(data.message === "Session expired"){
-            signoutUser();
+            dispatch(signOutSuccess(data));
             return;
             }
            if(data.success === false){

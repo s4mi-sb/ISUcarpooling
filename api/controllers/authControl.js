@@ -225,7 +225,7 @@ export const signin = async (req,res,next) =>{
 export const signout = async (req,res,next) =>{
     try {
         res.clearCookie('accessToken');
-        res.status(200).json({message: 'You were logged out'});
+        res.status(200).json({message: ''});
     } catch (error) {
         next(error);
     }

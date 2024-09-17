@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
-import { updateUserError,updateUserStart, updateUserSuccess, 
-  deleteUserError,deleteUserStart,deleteUserSuccess,
+import { updateUserError,updateUserStart, updateUserSuccess,
 signOutError, signOutSuccess, signOutStart } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom'
@@ -97,22 +96,6 @@ export default function Profile() {
       setupdate(true);
     } catch (error) {
       dispatch(updateUserError(error.message));
-    }
-  }
-  const handleDelete = async () =>{
-    try {
-      dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`,{
-        method: "DELETE",
-      });
-      const data = await res.json();
-      if(data.success === false){
-        dispatch(deleteUserError(data.message));
-        return;
-      }
-      dispatch(deleteUserSuccess(data));
-    } catch (error) {
-      dispatch(deleteUserError(error.message));
     }
   }
 
