@@ -36,6 +36,11 @@ app.use("/api/user", userRoute);
 
 app.use("/api/rideShare", rideRouter);
 
+app.use(cors({
+    origin: 'https://isucarpool.vercel.app/',
+    methods : ["POST","GET", "DELETE"],
+    credentials: true
+}));
 
 app.use(express.static(path.join(_dirname,'/client/dist')));
 
